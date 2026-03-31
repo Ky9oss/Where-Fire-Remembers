@@ -8,6 +8,11 @@ tagfiles
 bin
 TODO.md
 *.o
+*.scan
+*.cache
+config.status
+Makefile
+*/Makefile
 
 include
 script.c

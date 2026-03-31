@@ -1,0 +1,42 @@
+# @configure_input@
+
+package = @PACKAGE_NAME@
+
+version = @PACKAGE_VERSION@
+
+tarname = @PACKAGE_TARNAME@
+
+distdir = $(tarname)-$(version)
+
+prefix = @prefix@
+
+exec_prefix = @exec_prefix@
+
+bindir = @bindir@
+
+srcdir = @srcdir@
+
+VPATH = @srcdir@
+
+memfiry all: main.c
+	$(CC) $(CFLAGS) -o $(package) $(srcdir)/main.c
+
+check: all
+	./memfiry | grep "hello.*"
+	@echo "*** All TESTS PASSED"
+
+install:
+	install -d $(DESTDIR)$(bindir)
+	install -m 0755 memfiry $(DESTDIR)$(bindir)
+
+uninstall:
+	rm -f $(DESTDIR)$(bindir)/memfiry
+	-rmdir -f $(DESTDIR)$(bindir) > /dev/null 2>&1
+
+clean:
+	rm -f memfiry
+
+Makefile: Makefile.in ../config.status
+	../config.status $@
+
+.PHONY: memfiry all check install uninstall clean Makefile

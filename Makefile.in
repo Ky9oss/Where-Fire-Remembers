@@ -1,21 +1,25 @@
-package = memfiry
+# @configure_input@
 
-version = 1.0
+package = @PACKAGE_NAME@
 
-tarname = $(package)
+version = @PACKAGE_VERSION@
+
+tarname = @PACKAGE_TARNAME@
 
 distdir = $(tarname)-$(version)
 
-prefix = /usr/local
+prefix = @prefix@
 
-exec_prefix = $(prefix)
+exec_prefix = @exec_prefix@
 
-bindir = $(exec_prefix)/bin
+bindir = @bindir@
+
+srcdir = @srcdir@
+
+VPATH = @srcdir@
 
 CC = gcc-15
 CFLAGS = -g -Wall -O2
-
-all memfiry: src/memfiry
 
 dist: $(distdir).tar.gz
 
@@ -25,9 +29,11 @@ $(distdir).tar.gz: $(distdir)
 
 $(distdir): FORCE
 	mkdir -p $(distdir)/src
-	cp Makefile $(distdir)
-	cp src/Makefile $(distdir)/src
-	cp src/main.c $(distdir)/src
+	cp $(srcdir)/configure $(distdir)
+	cp $(srcdir)/configure.ac $(distdir)
+	cp $(srcdir)/Makefile.in $(distdir)
+	cp $(srcdir)/src/Makefile.in $(distdir)/src
+	cp $(srcdir)/src/main.c $(distdir)/src
 
 FORCE:
 	-rm -f $(distdir).tar.gz > /dev/null 2>&1
@@ -48,6 +54,15 @@ distcheck: $(distdir).tar.gz
 	rm -rf $(distdir)
 	@echo "*** Package $(distdir).tar.gz is ready for distribution."
 
-include src/Makefile
+Makefile: Makefile.in config.status
+	./config.status $@
 
-.PHONY: FORCE all clean check dist distcheck install uninstall 
+config.status: configure
+	./config.status --recheck
+
+# include src/Makefile
+
+all clean check install uninstall memorify:
+	cd $(srcdir)/src && $(MAKE) $@
+
+.PHONY: FORCE dist distcheck
