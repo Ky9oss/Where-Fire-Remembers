@@ -1,0 +1,13 @@
+*.log
+.env
+tags
+.clangd
+all-includes.txt
+Session.vim
+tagfiles
+bin
+TODO.md
+*.o
+
+include
+script.c
