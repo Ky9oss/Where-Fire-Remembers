@@ -7,12 +7,20 @@ Session.vim
 tagfiles
 bin
 TODO.md
-*.o
 *.scan
 *.cache
 config.status
 Makefile
-*/Makefile
+*.o
+*.lo
+*.la
+*.a
+*.so
+memfiry
+*~
+.dirstamp
+.deps
+temp
 
 include
 script.c

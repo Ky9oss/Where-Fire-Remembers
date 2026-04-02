@@ -1,7 +1,7 @@
-#include <stdio.h>
+#include "config.h"
+#include "jupcommon.h"
 
-
-int main() {
-    printf("hello memfiry");
-    return 0;
+int main(int argc, char *argv[])
+{
+  return print_routine(argv[0]);
 }
