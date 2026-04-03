@@ -1,5 +1,5 @@
 #include "config.h"
-#include "jupcommon.h"
+#include "firycommon.h"
 #include <stdio.h>
 #include <stdlib.h>
 

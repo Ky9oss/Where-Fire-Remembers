@@ -2,15 +2,24 @@ AC_INIT([memfiry], [1.0])
 
 AM_INIT_AUTOMAKE([subdir-objects])
 
+LT_PREREQ([2.5.0])
+
+LT_INIT([dlopen])
+
 AC_CONFIG_SRCDIR([src/main.c])
 
-AC_CONFIG_FILES([Makefile])
+AC_CONFIG_FILES([Makefile
+                 include/Makefile
+                 common/Makefile
+                 libfiry/Makefile
+                 src/Makefile])
 
 AC_CONFIG_HEADERS([config.h])
 
+AC_CONFIG_MACRO_DIRS([m4])
+
 AC_PROG_CC
 AC_PROG_INSTALL
-AC_PROG_RANLIB
 
 # _DEBUG_START_
 

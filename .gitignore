@@ -20,7 +20,8 @@ memfiry
 *~
 .dirstamp
 .deps
+.libs
 temp
+*bak
 
-include
 script.c
